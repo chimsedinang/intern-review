@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp">
+
+        <intership.dev.contact.CircleImageView
+            android:id="@+id/icContactFragment"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_nu" />
+
+        <TextView
+
+            android:id="@+id/tvNameContactFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="My Name"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/tvNameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#caff70"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:singleLine="true"
+        android:hint="User Name"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#caff70"
+        android:gravity="center_vertical"
+        android:minHeight="40dp"
+        android:paddingLeft="20dp"
+        android:hint="Description"
+        android:textColor="#000000"
+        android:text=""
+        android:textSize="25sp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="40dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="40dp">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custom_border_button"
+            android:gravity="center"
+            android:text="Save"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnCancle"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custom_border_button"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>
