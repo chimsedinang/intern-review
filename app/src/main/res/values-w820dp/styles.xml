@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+
+        <item name="actionBarSize">80dip</item>
+<item name="android:actionBarSize">80dip</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>
