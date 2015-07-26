@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:background="#ffffff"
+    android:id="@+id/LinerLayoutListview"
     android:gravity="center_vertical">
 
     <intership.dev.contact.CircleImageView

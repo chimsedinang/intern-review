@@ -21,7 +21,7 @@ public class Fragment_Contacts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final int position;
         View rootview=inflater.inflate(R.layout.fragment_contact,container,false);
-        Toast.makeText(getActivity(),getArguments().getInt("ic")+"",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(),getArguments().getInt("ic")+"",Toast.LENGTH_LONG).show();
         CircleImageView ic= (CircleImageView) rootview.findViewById(R.id.icContactFragment);
         ic.setImageResource(getArguments().getInt("ic"));
         TextView tvName= (TextView) rootview.findViewById(R.id.tvNameContactFragment);
@@ -35,11 +35,22 @@ public class Fragment_Contacts extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MyDatabase mydb = new MyDatabase(getActivity());
+                mydb.open();
+                try {
+                    if (mydb.Update_Contact(Constant.array_contact.get(position).getTvNameContact(),edtName2.getText().toString(),edtDes.getText().toString())) {
+                    } else {
+                        Toast.makeText(getActivity(), "Update Contact error....", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Update Contact error....", Toast.LENGTH_SHORT).show();
+                }
+                mydb.close();
                 Constant.array_contact.get(position).setTvNameContact(edtName2.getText().toString());
                 Constant.array_contact.get(position).setDescription(edtDes.getText().toString());
                 MainActivity.adapter_contact.notifyDataSetChanged();
                 MainActivity.frameLayout.setVisibility(View.GONE);
-                Constant.DISPLAY_FRAGMENT=0;
+
 
                 //TODO
             }
@@ -49,7 +60,7 @@ public class Fragment_Contacts extends Fragment {
             @Override
             public void onClick(View view) {
                 MainActivity.frameLayout.setVisibility(View.GONE);
-                Constant.DISPLAY_FRAGMENT=1;
+
             }
         });
 

@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ import java.util.ArrayList;
  */
 public class Custom_Adapter_Contact extends ArrayAdapter<Contacts_Item> {
     private Context context;
-
     public Custom_Adapter_Contact(Context context, int resource, ArrayList<Contacts_Item> arr) {
         super(context, resource, arr);
         this.context = context;
@@ -35,6 +36,7 @@ public class Custom_Adapter_Contact extends ArrayAdapter<Contacts_Item> {
         private TextView tvNameContact;
         private ImageView icContact;
         private Button btnEdit, btnDelete;
+        private LinearLayout linearLayout;
     }
 
     ViewHolder holder;
@@ -50,6 +52,7 @@ public class Custom_Adapter_Contact extends ArrayAdapter<Contacts_Item> {
             holder.icContact = (ImageView) myView.findViewById(R.id.icContact);
             holder.btnEdit = (Button) myView.findViewById(R.id.btnEditContact);
             holder.btnDelete = (Button) myView.findViewById(R.id.btnDeleteContact);
+            holder.linearLayout= (LinearLayout) myView.findViewById(R.id.LinerLayoutListview);
             myView.setTag(holder);
 
         } else {
@@ -75,6 +78,19 @@ public class Custom_Adapter_Contact extends ArrayAdapter<Contacts_Item> {
                 builder.setPositiveButton("Đúng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        MyDatabase mydb = new MyDatabase(context);
+                        mydb.open();
+                        try {
+                            if (mydb.delete_Contact(Constant.array_contact.get(position).getTvNameContact())) {
+
+                            } else {
+                                Toast.makeText(context, "Delete Contact error....", Toast.LENGTH_SHORT).show();
+                            }
+                            ;
+                        } catch (Exception e) {
+                            Toast.makeText(context, "Delete Contact error....", Toast.LENGTH_SHORT).show();
+                        }
+                        mydb.close();
                         Constant.array_contact.remove(position);
                         notifyDataSetChanged();
                     }
@@ -85,23 +101,23 @@ public class Custom_Adapter_Contact extends ArrayAdapter<Contacts_Item> {
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Constant.DISPLAY_FRAGMENT == 0) {
-                    Fragment fragment=new Fragment_Contacts();
-                    Bundle bd=new Bundle();
-                    bd.putInt("ic",Constant.array_contact.get(position).getIc_contact());
+
+                    Fragment fragment = new Fragment_Contacts();
+                    Bundle bd = new Bundle();
+                    bd.putInt("ic", Constant.array_contact.get(position).getIc_contact());
                     bd.putString("tv", Constant.array_contact.get(position).getTvNameContact());
-                    bd.putString("des",Constant.array_contact.get(position).getDescription());
-                    bd.putInt("position", position);
+                    bd.putString("des", Constant.array_contact.get(position).getDescription());
+                bd.putInt("position", position);
                     fragment.setArguments(bd);
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
                     MainActivity.frameLayout.setVisibility(View.VISIBLE);
-                    Constant.DISPLAY_FRAGMENT = 1;
 
-                } else {
-                    MainActivity.frameLayout.setVisibility(View.GONE);
-                    Constant.DISPLAY_FRAGMENT = 0;
-                }
-
+            }
+        });
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,Constant.array_contact.get(position).getDescription()+"", Toast.LENGTH_LONG).show();
             }
         });
 

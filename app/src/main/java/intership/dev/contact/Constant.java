@@ -10,7 +10,6 @@ import java.util.logging.Handler;
  */
 public class Constant {
     public static ArrayList<Contacts_Item> array_contact=new  ArrayList<Contacts_Item>();
-    public static int DISPLAY_FRAGMENT=0;
     public  static Contacts_Item contacts_item=new Contacts_Item();
     public static int position;
 

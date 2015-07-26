@@ -4,16 +4,17 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -28,15 +29,31 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         parentActionbar();
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_nu, "Chimse", ""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Dinang", ""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Ai Ia",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"O Dau",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, " Ma Thui",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Gom Rua",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Dinang",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Dinang",""));
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Dinang",""));
+        Constant.array_contact.clear();
+        Cursor cur=null;
+        MyDatabase mydb=new MyDatabase(MainActivity.this);
+        mydb.open();
+        try {
+            cur=mydb.getAllContact();
+        }catch (Exception e){
+            Toast.makeText(MainActivity.this,"Get All ListContact Not Complete",Toast.LENGTH_SHORT).show();
+        }
+        if(cur.moveToFirst()){
+            do {
+                Constant.array_contact.add(new Contacts_Item(cur.getInt(0),cur.getString(1),cur.getString(2)));
+            } while (cur.moveToNext());
+        }
+        mydb.close();
+
+        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_nu, "Chimse", "09000000"));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Dinang", ""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Ai Ia",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"O Dau",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, " Ma Thui",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Gom Rua",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Dinang",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Dinang",""));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Dinang",""));
         adapter_contact=new Custom_Adapter_Contact(MainActivity.this,R.layout.custom_listview_contact, Constant.array_contact);
         lvContact=(ListView)findViewById(R.id.lvContact);
         lvContact.setAdapter(adapter_contact);
@@ -56,8 +73,6 @@ public class MainActivity extends Activity {
 
 
 
-
-
     public void parentActionbar() {
         ActionBar parent_Actionbar = getActionBar();
         parent_Actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -68,6 +83,8 @@ public class MainActivity extends Activity {
         imvback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent i=new Intent(MainActivity.this,Add_Contact.class);
+//                startActivity(i);
                 finish();
             }
         });

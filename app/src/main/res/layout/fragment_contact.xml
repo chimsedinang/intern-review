@@ -51,6 +51,7 @@
         android:background="#caff70"
         android:gravity="center_vertical"
         android:minHeight="40dp"
+        android:inputType="number"
         android:paddingLeft="20dp"
         android:hint="Description"
         android:textColor="#000000"
