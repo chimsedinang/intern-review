@@ -16,7 +16,7 @@
             android:id="@+id/icContactFragment"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_nu" />
+            android:src="@drawable/ic_woman1" />
 
         <TextView
 

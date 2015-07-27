@@ -21,7 +21,12 @@ import java.util.ArrayList;
  */
 public class Add_Contact extends Activity {
     private Gallery galleryicon;
-    int listIcon[]={R.drawable.ic_man1,R.drawable.ic_man2,R.drawable.ic_nu,R.drawable.ic_recipe_to_try_1};
+    int listIcon[]={R.drawable.ic_man4,R.drawable.ic_man5
+            ,R.drawable.ic_man6,R.drawable.ic_woman1,R.drawable.ic_woman4
+            ,R.drawable.ic_woman5,R.drawable.ic_woman6,R.drawable.ic_woman7
+            ,R.drawable.ic_woman8,R.drawable.ic_woman9,R.drawable.ic_woman10
+            ,R.drawable.ic_man1,R.drawable.ic_man2,R.drawable.ic_man3
+            ,R.drawable.ic_woman2,R.drawable.ic_woman3};
     private ImageView imview;
     private EditText edtName,edtDes;
     private Button btnAdd,btnthoat,btnBoqua;
@@ -89,6 +94,7 @@ public class Add_Contact extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                        finish();
+
                     }
                 });
                 builder.create().show();
@@ -113,13 +119,7 @@ public class Add_Contact extends Activity {
         galleryicon= (Gallery) findViewById(R.id.galleryIcon);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+
+
 }

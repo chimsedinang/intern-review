@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends Activity {
 
@@ -30,6 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         parentActionbar();
         Constant.array_contact.clear();
+        Constant.array_contact=new ArrayList<Contacts_Item>();
         Cursor cur=null;
         MyDatabase mydb=new MyDatabase(MainActivity.this);
         mydb.open();
@@ -45,7 +48,7 @@ public class MainActivity extends Activity {
         }
         mydb.close();
 
-        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_nu, "Chimse", "09000000"));
+//        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_nu, "Chimse", "09000000"));
 //        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1, "Dinang", ""));
 //        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"Ai Ia",""));
 //        Constant.array_contact.add(new Contacts_Item(R.drawable.ic_recipe_to_try_1,"O Dau",""));
